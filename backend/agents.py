@@ -8,7 +8,7 @@ import asyncio
 
 import json
 
-from mcp.mcp_client import (
+from mcp_tools.mcp_client import (
     tavily_search,
     list_airports,
     list_airlines,
