@@ -249,12 +249,21 @@ if st.session_state.get("waiting_for_approval"):
 # Final Response
 # -------------------------------------------------------
 
-final = st.session_state.get("latest_result")
+final_chunk = st.session_state.get("latest_result")
 
-if final and final.get("final_response"):
+if final_chunk:
+    
+    # 1. Get the name of the node that just finished (e.g., 'human_approval' or 'final_response')
+    node_name = list(final_chunk.keys())[0]
+    
+    # 2. Extract the actual state update dictionary from inside that node
+    state_update = final_chunk[node_name]
 
-    st.divider()
+    # 3. Check if the final string exists inside the state and render it
+    if isinstance(state_update, dict) and "final_response" in state_update:
 
-    st.subheader("🎉 Final Travel Plan")
+        st.divider()
 
-    st.markdown(final["final_response"])
+        st.subheader("🎉 Final Travel Plan")
+
+        st.markdown(state_update["final_response"])
