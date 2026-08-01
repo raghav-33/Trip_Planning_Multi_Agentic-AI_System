@@ -12,3 +12,4 @@ langgraph-checkpoint-postgres
 psycopg[binary]
 psycopg-pool
 mcp==1.28.1
+./mcp_tools/aviationstack-mcp
