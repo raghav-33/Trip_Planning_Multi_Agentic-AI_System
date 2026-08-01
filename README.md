@@ -1,6 +1,6 @@
 # ✈️ Multi-Agent AI Travel Planner
 
-A stateful, autonomous multi-agent AI system designed to dynamically generate, refine, and finalize comprehensive travel itineraries with a Human-in-the-Loop (HITL) approval mechanism.
+An AI-powered travel planning system that uses multiple specialized agents to create personalized travel itineraries. Users can review the itinerary, provide feedback, and approve changes through a Human-in-the-Loop (HITL) workflow before the final plan is generated.
 
 ## Overview
 
@@ -8,11 +8,11 @@ The Multi-Agent AI Travel Planner leverages **LangGraph** to orchestrate a team 
 
 ## Problem Statement
 
-Coordinating a trip requires synthesizing information across multiple fragmented domains: flights, accommodations, local weather, and strict budget constraints. Traditional LLMs hallucinate real-time data and struggle with complex, multi-step constraints.
+Travel planning involves more than just generating an itinerary. It requires up-to-date flight information, weather forecasts, accommodation options, and budget planning. Traditional LLMs can struggle with real-time data and multi-step decision-making.Traditional LLMs hallucinate real-time data and struggle with complex, multi-step constraints. To overcome this, the system uses multiple AI agents that collaborate and retrieve live information from external APIs before generating the final itinerary. .
 
 ## Solution
 
-This project solves this by decoupling responsibilities into specialized, domain-specific AI agents. A Supervisor agent routes tasks, while worker agents fetch deterministic, real-time data via MCP tools. The inclusion of persistent state memory ensures that the AI can self-correct based on direct human feedback without restarting the planning process.
+The system uses a multi-agent architecture where each AI agent focuses on a specific responsibility instead of trying to solve the entire problem alone. A Supervisor agent coordinates the workflow and delegates tasks to specialized agents for flights, weather, budgeting, and itinerary planning. The agents access real-time data through MCP tools, and the application's persistent state allows users to review drafts, provide feedback, and refine the itinerary without restarting the planning process.
 
 ## Features
 
@@ -21,10 +21,6 @@ This project solves this by decoupling responsibilities into specialized, domain
 - **Human-in-the-Loop (HITL)**: Thread-level execution pausing allowing users to approve or reject draft itineraries with custom feedback.
 - **Persistent Memory**: PostgreSQL-backed checkpointer (`langgraph-checkpoint-postgres`) saves conversational and agent state across sessions.
 - **Real-Time Data Streaming**: Frontend UI updates asynchronously as individual agents complete their tasks.
-
-## Demo
-
-*(Add a GIF or video demonstrating the Streamlit UI, the progress bar loading through the agents, and the Human-in-the-Loop approval step)*
 
 ## Architecture
 
@@ -49,39 +45,6 @@ graph TD
         FA <--> |stdio / runner script| Aviation[AviationStack MCP]
         WA <--> |stdio| Weather[OpenWeather MCP]
         IA <--> |HTTP| Tavily[Tavily Search MCP]
-    end
-```
-
-## Workflow
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant Streamlit
-    participant Supervisor
-    participant Agents
-    participant Checkpointer
-
-    User->>Streamlit: Enters Travel Request (e.g., "Goa from Amritsar")
-    Streamlit->>Supervisor: app.stream(User Query, config)
-    Supervisor->>Agents: Route to relevant domain agents
-    Agents->>Agents: Fetch data via MCP Tools
-    Agents->>Supervisor: Return data (Flights, Weather, etc.)
-    Supervisor->>Agents: Route to Itinerary Agent
-    Agents->>Checkpointer: Save Draft State (__interrupt__)
-    Checkpointer->>Streamlit: Yield Draft Itinerary
-    Streamlit->>User: Display Draft & Request Approval
-
-    alt User Rejects
-        User->>Streamlit: Provides Feedback
-        Streamlit->>Supervisor: app.stream(Command(resume={feedback}))
-        Supervisor->>Agents: Refine itinerary based on feedback
-    else User Approves
-        User->>Streamlit: Clicks "Approve"
-        Streamlit->>Supervisor: app.stream(Command(resume={approved: True}))
-        Supervisor->>Checkpointer: Finalize State
-        Checkpointer->>Streamlit: Yield final_response
-        Streamlit->>User: Display 🎉 Final Travel Plan
     end
 ```
 
@@ -204,7 +167,7 @@ The system has been evaluated for domain accuracy and orchestration efficiency.
 | Budget Accuracy | 3.98 |
 | Weather Accuracy | 3.93 |
 | Hotel Sourcing | 3.89 |
-| Supervisor (Strict Routing Threshold) | 2.40 |
+| Supervisor (Strict Routing Threshold) | 4.38 |
 
 ## Performance
 
@@ -212,11 +175,7 @@ The system has been evaluated for domain accuracy and orchestration efficiency.
 - **Latency (p99)**: 69.9 seconds
 - **Optimizations**: The application utilizes an `_tools_cache` global variable in `mcp_client.py` to prevent redundant loading and initialization of MCP servers across asynchronous LLM calls.
 
-## Error Handling
 
-- **UI Level**: Standard `st.error(e)` wrapper catches and displays orchestration failures during the `app.stream()` execution.
-- **MCP Protocol**: Custom script execution (`aviation_runner.py`) uses `runpy` to explicitly enforce `sys.path` injection. This mitigates `ModuleNotFoundError` and unhandled errors in a `TaskGroup` caused by Linux subprocess isolation dropping `PYTHONPATH` arguments.
-- **Dictionary Parsing**: Frontend explicitly unpacks LangGraph node chunks (`final_chunk[node_name]`) to prevent Streamlit from rendering raw JSON/Dict objects to the end-user.
 
 ## Deployment
 
