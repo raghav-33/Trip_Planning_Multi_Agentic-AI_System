@@ -1,0 +1,276 @@
+Recommended Folder Structure
+evaluation/
+│
+├── __init__.py
+├── schemas.py
+├── prompts.py
+├── evaluator.py          # orchestrates all evaluations
+│
+├── supervisor.py
+├── flight.py
+├── hotel.py
+├── weather.py
+├── budget.py
+├── itinerary.py
+└── final_response.py
+Common Schema (schemas.py)
+
+Every evaluator returns the same object.
+
+from pydantic import BaseModel, Field
+
+
+class AgentEvaluation(BaseModel):
+    agent_name: str
+
+    score: int = Field(..., ge=1, le=10)
+
+    strengths: list[str]
+
+    weaknesses: list[str]
+
+    reasoning: str
+Example: Flight Evaluator
+from langchain_core.prompts import ChatPromptTemplate
+
+from config import get_llm
+from evaluation.schemas import AgentEvaluation
+
+llm = get_llm().with_structured_output(AgentEvaluation)
+
+prompt = ChatPromptTemplate.from_template(
+"""
+You are evaluating the Flight Agent.
+
+User Query:
+{query}
+
+Trip Constraints:
+{constraints}
+
+Flight Agent Output:
+{output}
+
+Evaluate:
+
+1. Airport correctness
+
+2. Airline relevance
+
+3. Travel practicality
+
+4. Budget awareness
+
+Give score out of 10.
+
+Return structured output.
+"""
+)
+
+
+def evaluate_flight_agent(
+    query,
+    constraints,
+    output,
+):
+
+    messages = prompt.invoke(
+        {
+            "query": query,
+            "constraints": constraints,
+            "output": output,
+        }
+    )
+
+    return llm.invoke(messages)
+Hotel Evaluator
+prompt = ChatPromptTemplate.from_template(
+"""
+Evaluate the Hotel Agent.
+
+User Query:
+{query}
+
+Hotel Output:
+{output}
+
+Evaluate:
+
+1. Hotel quality
+
+2. Area recommendations
+
+3. Budget suitability
+
+4. Practical usefulness
+
+Score out of 10.
+"""
+)
+
+
+def evaluate_hotel_agent(
+    query,
+    output,
+):
+    ...
+Weather Evaluator
+Evaluate:
+
+- weather correctness
+
+- packing advice
+
+- seasonal relevance
+
+- usefulness
+def evaluate_weather_agent(...):
+    ...
+Budget Evaluator
+
+Evaluate
+
+Budget estimate accuracy
+
+Savings suggestions
+
+Realistic costs
+
+Constraint following
+def evaluate_budget_agent(...):
+    ...
+Itinerary Evaluator
+
+Evaluate
+
+Daily plan
+
+Logical flow
+
+Coverage
+
+Activities
+
+Travel efficiency
+def evaluate_itinerary_agent(...):
+    ...
+Supervisor Evaluator
+
+This is one of the most interesting evaluations.
+
+Input
+
+query
+
+selected_agents
+
+trip_constraints
+
+Prompt
+
+Did the supervisor choose the correct agents?
+
+Were any unnecessary agents selected?
+
+Were any required agents missed?
+
+Extracted constraints correct?
+
+Score out of 10.
+
+Function
+
+def evaluate_supervisor(
+    query,
+    selected_agents,
+    constraints,
+    reasoning,
+):
+    ...
+Final Response Evaluator
+
+Evaluate
+
+Overall quality
+
+Formatting
+
+User friendliness
+
+Completeness
+
+Constraint satisfaction
+def evaluate_final_response(...):
+    ...
+Master Evaluator
+
+Then evaluation/evaluator.py simply orchestrates all the individual evaluators.
+
+from evaluation.flight import evaluate_flight_agent
+from evaluation.hotel import evaluate_hotel_agent
+from evaluation.weather import evaluate_weather_agent
+from evaluation.budget import evaluate_budget_agent
+from evaluation.itinerary import evaluate_itinerary_agent
+from evaluation.supervisor import evaluate_supervisor
+from evaluation.final_response import evaluate_final_response
+
+
+def evaluate_graph(state):
+
+    results = {}
+
+    results["supervisor"] = evaluate_supervisor(
+        state["user_query"],
+        state["selected_agents"],
+        state["trip_constraints"],
+        state["supervisor_reasoning"],
+    )
+
+    if state.get("flight_results"):
+        results["flight"] = evaluate_flight_agent(
+            state["user_query"],
+            state["trip_constraints"],
+            state["flight_results"],
+        )
+
+    if state.get("hotel_results"):
+        results["hotel"] = evaluate_hotel_agent(
+            state["user_query"],
+            state["hotel_results"],
+        )
+
+    if state.get("weather_results"):
+        results["weather"] = evaluate_weather_agent(
+            state["user_query"],
+            state["weather_results"],
+        )
+
+    if state.get("budget_results"):
+        results["budget"] = evaluate_budget_agent(
+            state["user_query"],
+            state["budget_results"],
+        )
+
+    if state.get("itinerary"):
+        results["itinerary"] = evaluate_itinerary_agent(
+            state["user_query"],
+            state["itinerary"],
+        )
+
+    if state.get("final_response"):
+        results["final"] = evaluate_final_response(
+            state["user_query"],
+            state["final_response"],
+        )
+
+    return results
+Why this design is better
+
+This architecture follows the Single Responsibility Principle:
+
+Each evaluator is responsible for one agent only.
+Each file has its own prompt tailored to that agent's output.
+You can improve or replace one evaluator without affecting the others.
+If you later add a Visa Agent, Restaurant Agent, or Activities Agent, you simply create a new evaluator file and register it in evaluator.py.
+
+This modular design is much closer to how evaluation pipelines are organized in production AI systems than putting all evaluation logic into one function.

@@ -1,0 +1,10 @@
+# Secret API keys
+.env
+
+# Virtual environments
+travel/
+
+# Python cache files
+__pycache__/
+*.pyc
+

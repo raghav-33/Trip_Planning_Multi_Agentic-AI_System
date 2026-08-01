@@ -1,0 +1,536 @@
+{
+    "summary": {
+        "Supervisor": 2.4,
+        "Flight": 4.37,
+        "Hotel": 3.89,
+        "Weather": 3.93,
+        "Budget": 3.98,
+        "Itinerary": 4.4,
+        "Final Response": 4.13
+    },
+    "examples": [
+        {
+            "query": "Family vacation to Singapore for 5 days under Rs 2 lakh.",
+            "supervisor": {
+                "task_completion": 4,
+                "accuracy": 4,
+                "relevance": 3,
+                "reasoning": 3,
+                "overall_score": 3,
+                "feedback": "Missing origin and travel style information. Unnecessary weather_agent and slight deviation in 'travel_style' constraint. However, correctly identified destination, budget, and duration."
+            },
+            "flight": {
+                "task_completion": 5,
+                "accuracy": 5,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4.6,
+                "feedback": "The output fully answers the flight request, respects trip constraints, and provides relevant airport and airline suggestions. However, the booking advice could be more polished and the estimated fare range could be more specific."
+            },
+            "hotel": {
+                "task_completion": 4,
+                "accuracy": 4,
+                "relevance": 4,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The hotel agent provided relevant and practical suggestions for hotels and locations in Singapore, taking into account the budget constraint of Rs 2 lakh. However, some of the hotels mentioned are not strictly under the budget constraint, and a more detailed breakdown of costs is needed to fully meet the requirements."
+            },
+            "weather": {
+                "task_completion": 3,
+                "accuracy": 4,
+                "relevance": 4,
+                "reasoning": 4,
+                "overall_score": 3.8,
+                "feedback": "The weather information is clear, but the forecast is only provided for a short period. Travel advice and packing suggestions are not explicitly stated, but can be inferred from the weather conditions. Overall, the information is useful, but lacks some detail."
+            },
+            "budget": {
+                "task_completion": 5,
+                "accuracy": 4,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The budget assessment is thorough and considers various cost categories, risk areas, and money-saving suggestions. However, the cost estimation accuracy could be slightly improved, and some of the recommendations may not be entirely practical (e.g., packing light and avoiding unnecessary expenses)."
+            },
+            "itinerary": {
+                "task_completion": 5,
+                "accuracy": 4,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The itinerary is well-planned and covers the requested duration of 5 days. However, the estimated costs exceed the budget of Rs 2 lakh, and some activities might not be feasible within the given time frame. The formatting is clean and professional, but the recommendations section could be more detailed."
+            },
+            "final_response": {
+                "task_completion": 5,
+                "accuracy": 5,
+                "relevance": 5,
+                "reasoning": 5,
+                "overall_score": 5,
+                "feedback": "The final travel plan is well-structured, comprehensive, and within the budget of Rs 2 lakh. It includes all necessary details such as flights, accommodation, food, transportation, and attractions. The budget breakdown is clear, and the money-saving suggestions are practical. The plan is feasible, and the recommendations are helpful."
+            }
+        },
+        {
+            "query": "Plan a Goa bachelor trip for 5 friends.",
+            "supervisor": {
+                "task_completion": 2,
+                "accuracy": 2,
+                "relevance": 2,
+                "reasoning": 2,
+                "overall_score": 2,
+                "feedback": "Missing important information like budget, origin, and duration. Unnecessary agents like weather_agent and budget_agent. Incorrectly identified travel_style and special_preferences as 'bachelor trip' and 'friend group' respectively."
+            },
+            "flight": {
+                "task_completion": 5,
+                "accuracy": 5,
+                "relevance": 5,
+                "reasoning": 5,
+                "overall_score": 5,
+                "feedback": "The response fully answers the flight request, respects all trip constraints, provides relevant airport suggestions, reasonable airline suggestions, and useful booking advice."
+            },
+            "hotel": {
+                "task_completion": 4,
+                "accuracy": 4,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "Recommended suitable hotels based on the prompt, suggested good locations/neighborhoods, and provided useful accommodation advice. Relevance to travel style is good, but not explicitly stated. Overall quality is good, but could be slightly more polished with more detailed information about specific hotel options and prices."
+            },
+            "weather": {
+                "task_completion": 3,
+                "accuracy": 4,
+                "relevance": 4,
+                "reasoning": 3,
+                "overall_score": 3.6,
+                "feedback": "Weather information quality is clear, but the format could be more human-readable. Forecast is mostly actionable, but lacks detail. Travel advice is implied but not explicitly stated. Packing suggestions could be more tailored to the destination. Overall, the weather agent provides useful but not outstanding information."
+            },
+            "budget": {
+                "task_completion": 5,
+                "accuracy": 4,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "Provides a detailed breakdown of costs and risks, but estimates seem to be a bit wide and do not specifically account for the origin and duration constraints. Money-saving suggestions are practical and useful."
+            },
+            "itinerary": {
+                "task_completion": 5,
+                "accuracy": 5,
+                "relevance": 5,
+                "reasoning": 5,
+                "overall_score": 5,
+                "feedback": "The response covers the entire trip duration, provides a logical day-wise plan, suggests realistic activities, has clean and professional formatting, and meets all the requested constraints."
+            },
+            "final_response": {
+                "task_completion": 4,
+                "accuracy": 4,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The plan is well-structured, comprehensive, and addresses the user's needs. However, some minor errors in estimated costs and risk areas could be polished, and the plan could benefit from more detailed suggestions for mitigating risks and making adjustments as needed."
+            }
+        },
+        {
+            "query": "Business trip from Bangalore to Chennai tomorrow.",
+            "supervisor": {
+                "task_completion": 2,
+                "accuracy": 2,
+                "relevance": 3,
+                "reasoning": 2,
+                "overall_score": 2,
+                "feedback": "Did not select the exact expected agents, incorrect constraint extraction and added unnecessary agents."
+            },
+            "flight": {
+                "task_completion": 4,
+                "accuracy": 5,
+                "relevance": 4,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The output answers the flight request and respects trip constraints. Airport and airline suggestions are mostly relevant. However, the output could be more polished and follow the original format more closely."
+            },
+            "hotel": {
+                "task_completion": 5,
+                "accuracy": 5,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The agent provided relevant and accurate information about hotels in Chennai and Bangalore, including specific hotel suggestions and locations. However, some of the suggestions could be more polished, and the agent's ability to reason and provide tailored advice is limited."
+            },
+            "weather": {
+                "task_completion": 5,
+                "accuracy": 4,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "Proper weather information was provided, but the forecast was limited to only 5 hours and had the same weather condition for all intervals. Minor errors in temperature and wind speed values. Travel advice and packing suggestions could be more specific and detailed."
+            },
+            "budget": {
+                "task_completion": 5,
+                "accuracy": 4,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "Budget feasibility assessment is mostly accurate, but slightly pessimistic. Cost estimation is good but could be more precise. Money-saving suggestions are practical and useful. Overall, the response is helpful and polished, but could benefit from more nuanced risk assessment."
+            },
+            "itinerary": {
+                "task_completion": 5,
+                "accuracy": 5,
+                "relevance": 5,
+                "reasoning": 5,
+                "overall_score": 5,
+                "feedback": "The itinerary is complete, accurate, and follows all constraints. The plan is well-reasoned and practical, with a clear budget breakdown and feasible suggestions for cost management. The formatting is clean and professional, making it easy to understand and follow."
+            },
+            "final_response": {
+                "task_completion": 5,
+                "accuracy": 4,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The plan is comprehensive and includes all necessary details. However, it could be slightly more polished by providing a more detailed breakdown of estimated costs and offering more tailored recommendations based on the user's preferences."
+            }
+        },
+        {
+            "query": "Luxury honeymoon in Switzerland under Rs 5 lakh.",
+            "supervisor": {
+                "task_completion": 4,
+                "accuracy": 4,
+                "relevance": 4,
+                "reasoning": 3,
+                "overall_score": 3.6,
+                "feedback": "The model selected all expected agents but included an unnecessary 'weather_agent'. It accurately extracted most constraints, but 'origin' and 'duration' were missing and 'travel_style' had a minor typo. The model was highly relevant to the prompt but had minor errors in reasoning."
+            },
+            "flight": {
+                "task_completion": 5,
+                "accuracy": 5,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4.75,
+                "feedback": "The AI output accurately answers the flight request and respects all the given trip constraints. It provides relevant airport and airline suggestions, and its booking advice is useful. However, the reasoning behind the estimated duration could be more detailed, and it would be beneficial to include more specific information about the honeymoon packages offered by the hotels."
+            },
+            "hotel": {
+                "task_completion": 4,
+                "accuracy": 4,
+                "relevance": 4,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The output provided several suitable hotel options, suggested good locations, offered useful accommodation advice, and was relevant to the stated travel style. However, the output could be slightly more polished to provide a more comprehensive answer."
+            },
+            "weather": {
+                "task_completion": 5,
+                "accuracy": 5,
+                "relevance": 4,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "Good, follows all constraints and is useful, but could be slightly more polished. Temperature and weather forecast formats are consistent and clear, but travel advice and packing suggestions are not provided. Overall, a decent but somewhat incomplete answer."
+            },
+            "budget": {
+                "task_completion": 4,
+                "accuracy": 4,
+                "relevance": 4,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The budget assessment is mostly accurate, and the suggestions are practical. However, it fails to consider the luxury aspect of the honeymoon and the destination's high prices, which may not allow for a feasible trip under Rs 5 lakh with the required travel style."
+            },
+            "itinerary": {
+                "task_completion": 4,
+                "accuracy": 4,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The itinerary covers most of the requested duration, but lacks a day-wise breakdown. The activities seem practical and realistic, and the formatting is clean and professional. However, the estimated costs and budget breakdown exceed the requested budget of Rs 5 Lakh."
+            },
+            "final_response": {
+                "task_completion": 5,
+                "accuracy": 4,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "User satisfaction is high due to the detailed and polished plan, but some costs are estimated rather than exact. Completeness is high as the plan incorporates all necessary elements, but it could be more polished. Correctness is high but for minor errors, and practicality is good. Overall, the plan is well-rounded but could benefit from more precise estimates."
+            }
+        },
+        {
+            "query": "Plan a family trip to Jaipur next month.",
+            "supervisor": {
+                "task_completion": 2,
+                "accuracy": 2,
+                "relevance": 2,
+                "reasoning": 2,
+                "overall_score": 2,
+                "feedback": "Failed to select the exact expected agents. Incorrect or missing constraints. Unnecessary agents present. Missing important information, particularly origin and travel style."
+            },
+            "flight": {
+                "task_completion": 5,
+                "accuracy": 5,
+                "relevance": 4,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The AI provided a comprehensive response to the flight request. However, it made some assumptions about the origin (US) and did not clarify the need for a visa for travel to India. The airline suggestions were reasonable, but the budget was not addressed in the response."
+            },
+            "hotel": {
+                "task_completion": 4,
+                "accuracy": 4,
+                "relevance": 4,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "Suitable hotels were suggested. Locations and neighborhoods were discussed. Useful accommodation advice was provided. Relevance to travel style varied. Overall quality was good, but minor errors and lack of detail were observed."
+            },
+            "weather": {
+                "task_completion": 4,
+                "accuracy": 4,
+                "relevance": 4,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "Weather information is clear and readable, forecast is actionable, travel advice is provided, and packing suggestions can be inferred. However, the output could be more polished with more detailed advice and suggestions."
+            },
+            "budget": {
+                "task_completion": 5,
+                "accuracy": 4,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "Budget feasibility is partially addressed but could be more explicit. Cost estimation accuracy is good but lacks a clear breakdown of all costs. Money-saving suggestions are practical and relevant. Advice is generally useful, but some points could be more detailed."
+            },
+            "itinerary": {
+                "task_completion": 5,
+                "accuracy": 5,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The itinerary is well-planned, covers the requested duration, and includes realistic activities. However, the budget breakdown and risk areas could be more detailed and specific to the destination."
+            },
+            "final_response": {
+                "task_completion": 5,
+                "accuracy": 4,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The plan is comprehensive and covers all aspects of the trip, but there are minor errors in budget breakdown and some sections could be more polished."
+            }
+        },
+        {
+            "query": "Suggest hotels for my business conference in Pune.",
+            "supervisor": {
+                "task_completion": 3,
+                "accuracy": 3,
+                "relevance": 4,
+                "reasoning": 3,
+                "overall_score": 3,
+                "feedback": "The task was partially completed with mostly accurate agent and constraint selection. However, some minor details like budget and origin were missing, and an unnecessary agent (weather_agent) was included. The conference preference was also capitalized incorrectly."
+            },
+            "hotel": {
+                "task_completion": 4,
+                "accuracy": 5,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "Relevant hotels were provided with descriptions, scores, and locations, but more polished and specific travel advice would elevate the score. Hallucination of quotes was present but the main content was accurate."
+            },
+            "weather": {
+                "task_completion": 4,
+                "accuracy": 4,
+                "relevance": 4,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The weather information is clear and readable, the forecast is actionable but for a short period, travel advice and packing suggestions could be more detailed, and the overall usefulness is good but could be more polished."
+            },
+            "budget": {
+                "task_completion": 4,
+                "accuracy": 4,
+                "relevance": 4,
+                "reasoning": 3,
+                "overall_score": 3.8,
+                "feedback": "The budget assessment and cost estimation are accurate and relevant. Money-saving suggestions are practical. However, the reasoning could be more polished, and the risk areas could be more clearly mitigated."
+            },
+            "itinerary": {
+                "task_completion": 4,
+                "accuracy": 4,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The Itinerary Agent provides a comprehensive travel plan with estimated costs, hotel suggestions, and practical money-saving suggestions. However, it lacks a detailed day-wise planning, and the itinerary could be more polished to make it more user-friendly."
+            },
+            "final_response": {
+                "task_completion": 5,
+                "accuracy": 4,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4.2,
+                "feedback": "The travel plan is well-structured, covers all necessary aspects, and provides a clear budget breakdown. However, it lacks concrete flight information and specific dates, which reduces its accuracy and completeness score. The plan is highly relevant to the user's query and demonstrates good reasoning skills, but some action items could be more detailed and specific."
+            }
+        },
+        {
+            "query": "Plan my anniversary vacation to Maldives.",
+            "supervisor": {
+                "task_completion": 2,
+                "accuracy": 2,
+                "relevance": 2,
+                "reasoning": 2,
+                "overall_score": 2,
+                "feedback": "Poor quality, ignores major constraints, or highly impractical. Fails to select required agents, extracts constraints inaccurately, and includes unnecessary agents."
+            },
+            "flight": {
+                "task_completion": 5,
+                "accuracy": 4,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The output provides a complete plan for the anniversary vacation to Maldives, but it does not respect the trip constraints (budget, origin, destination) as it assumes a moderate to high budget and origin from major US or European cities without specifying. The airport suggestions are highly relevant, and airline suggestions are reasonable. The booking advice is useful, but it could be more polished."
+            },
+            "hotel": {
+                "task_completion": 5,
+                "accuracy": 5,
+                "relevance": 5,
+                "reasoning": 5,
+                "overall_score": 5,
+                "feedback": "The response is highly informative, with a good range of hotels and locations suggested. It provides useful advice on choosing a hotel based on travel style and includes several relevant links and articles."
+            },
+            "weather": {
+                "task_completion": 4,
+                "accuracy": 4,
+                "relevance": 4,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "Weather information is clear and readable, forecast is actionable, but lacks detailed travel advice and packing suggestions. Overall, the information is useful, but could be more polished."
+            },
+            "budget": {
+                "task_completion": 4,
+                "accuracy": 4,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The budget assessment is mostly accurate, relevant, and practical. However, the estimated costs and risk areas could be more detailed, and some suggestions could be more tailored to the specific anniversary vacation. The budget breakdown is a good estimate, but the actual costs may vary significantly depending on individual preferences and circumstances."
+            },
+            "itinerary": {
+                "task_completion": 5,
+                "accuracy": 5,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The itinerary covers the requested duration, provides a logical flow of activities, and is generally practical. However, the choice of accommodation and transportation options could be more varied, and the budget breakdown could be more detailed."
+            },
+            "final_response": {
+                "task_completion": 4,
+                "accuracy": 5,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The plan covers almost all aspects of a trip to Maldives, including accommodation, transportation, food, and activities. It provides a clear itinerary and budget breakdown. However, it lacks detailed information about flights and some minor details could be polished."
+            }
+        },
+        {
+            "query": "Business trip to Hyderabad for 2 days.",
+            "supervisor": {
+                "task_completion": 2,
+                "accuracy": 2,
+                "relevance": 3,
+                "reasoning": 2,
+                "overall_score": 2,
+                "feedback": "Poor quality scores due to incorrect agent selection, missing origin and travel style constraints, and presence of unnecessary agents. Additionally, the budget constraint was left blank and not extracted correctly."
+            },
+            "flight": {
+                "task_completion": 5,
+                "accuracy": 4,
+                "relevance": 4,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The output answers the flight request, respects trip constraints, and provides relevant airport and airline suggestions. However, the estimated fare range is not specific to the origin airport, and the sample itinerary does not account for the origin airport constraint."
+            },
+            "hotel": {
+                "task_completion": 0,
+                "accuracy": 1,
+                "relevance": 1,
+                "reasoning": 1,
+                "overall_score": 1,
+                "feedback": "The response is completely unrelated to the prompt and does not answer any of the questions posed. It appears to be a collection of unrelated web pages and definitions for the word 'best'."
+            },
+            "weather": {
+                "task_completion": 4,
+                "accuracy": 4,
+                "relevance": 4,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The Weather Agent provided clear and readable weather information, but forecast information was limited to a single day. Travel advice and packing suggestions could be more detailed. Overall, the information was useful but lacked polish."
+            },
+            "budget": {
+                "task_completion": 5,
+                "accuracy": 4,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "Budget feasibility assessment was accurate, but the estimated costs were broad and could be more specific. Money-saving suggestions were practical, but some details could be further refined."
+            },
+            "itinerary": {
+                "task_completion": 5,
+                "accuracy": 5,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4.6,
+                "feedback": "The itinerary is complete, accurate, and relevant to the user's request. It covers the requested duration of 2 days and provides a detailed plan. The reasoning is sound, but some sections could be more polished and concise."
+            },
+            "final_response": {
+                "task_completion": 4,
+                "accuracy": 4,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The plan is comprehensive, but the budget notes could be more detailed and the risk assessment could be more specific. The plan is well-structured and meets most of the user's requirements, but it could benefit from more precise numbers and clearer action steps."
+            }
+        },
+        {
+            "query": "Plan a honeymoon trip to Bali for 7 days from Mumbai.",
+            "supervisor": {
+                "task_completion": 2,
+                "accuracy": 1,
+                "relevance": 2,
+                "reasoning": 1,
+                "overall_score": 2,
+                "feedback": "Poor agent selection as it did not pick the exact expected agents and included unnecessary ones. Inaccurate constraint extraction for budget, travel style, and special preferences."
+            },
+            "flight": {
+                "task_completion": 5,
+                "accuracy": 5,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4.6,
+                "feedback": "The output answers the flight request, respects trip constraints, provides relevant airport and airline suggestions, and offers useful booking advice. However, it lacks a specific budget estimate, which is a requested trip constraint. Additionally, some advice could be more polished."
+            },
+            "hotel": {
+                "task_completion": 5,
+                "accuracy": 5,
+                "relevance": 5,
+                "reasoning": 5,
+                "overall_score": 5,
+                "feedback": "The Hotel Agent provided a comprehensive and accurate response, recommending suitable hotels and locations for a 7-day honeymoon trip to Bali from Mumbai. The response includes a variety of options, from luxury to budget-friendly, and provides useful accommodation advice. The information is highly relevant to the stated travel style, and the response is well-reasoned and polished."
+            },
+            "weather": {
+                "task_completion": 4,
+                "accuracy": 5,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "Weather information quality is good, but minor errors in temperature units. Forecast is actionable and useful. Travel advice and packing suggestions are implied, but not explicitly stated. Overall, the output is practical and accurate, but could be slightly more polished."
+            },
+            "budget": {
+                "task_completion": 5,
+                "accuracy": 4,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "Budget feasibility assessment is mostly accurate, but the provided budget is blank, which makes it difficult to assess if the trip is affordable within that specific budget. Cost estimation is accurate based on context. Money saving suggestions and practicality of the advice are good. Overall, the response is useful but could be more polished."
+            },
+            "itinerary": {
+                "task_completion": 5,
+                "accuracy": 5,
+                "relevance": 5,
+                "reasoning": 5,
+                "overall_score": 5,
+                "feedback": "Complete itinerary for 7 days, accurate information, relevant suggestions, good reasoning, and well-structured day-by-day plan."
+            },
+            "final_response": {
+                "task_completion": 5,
+                "accuracy": 4,
+                "relevance": 5,
+                "reasoning": 4,
+                "overall_score": 4,
+                "feedback": "The plan is well-structured and attempts to address all aspects of a trip. However, the budget breakdown is not as detailed as it could be, and some estimates seem too broad. The plan also doesn't account for personal preferences and potential changes in travel plans."
+            }
+        }
+    ]
+}
