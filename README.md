@@ -2,6 +2,8 @@
 
 An AI-powered travel planning system that uses multiple specialized agents to create personalized travel itineraries. Users can review the itinerary, provide feedback, and approve changes through a Human-in-the-Loop (HITL) workflow before the final plan is generated.
 
+**🔗 Live Demo:** [trip-planning-multi-agentic-ai-system.onrender.com](https://trip-planning-multi-agentic-ai-system.onrender.com)
+
 ## Overview
 
 The Multi-Agent AI Travel Planner leverages **LangGraph** to orchestrate a team of specialized AI agents. By utilizing the **Model Context Protocol (MCP)**, these agents securely interact with external APIs to fetch real-time flight, weather, and general travel data. The system persists state across sessions using **PostgreSQL**, allowing users to interrupt the AI's workflow, review draft itineraries, and provide feedback before finalization.
@@ -185,12 +187,6 @@ This project is configured for cloud deployment on Render.
 - **Build Command**: `pip install -r requirements.txt`
 - **Start Command**: `streamlit run frontend.py --server.port $PORT --server.address 0.0.0.0`
 
-## Live | Deployed Project Link
-```bash
-https://trip-planning-multi-agentic-ai-system.onrender.com
-```
-
-
 ## Future Improvements
 
 - Replace local stdio MCP execution with external REST or SSE-based MCP servers to fully decouple the AI backend from environment-specific pathing issues.
@@ -203,4 +199,4 @@ MIT License
 
 ## Author
 
-Raghav
+Raghav Devgan
