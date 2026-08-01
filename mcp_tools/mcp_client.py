@@ -13,6 +13,11 @@ OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 WEATHER_SERVER_PATH = os.path.join(BASE_DIR, "weather_mcp_server.py")
 
+# Paths for aviationstack-mcp module (handles both root and src layouts)
+AVIATION_DIR = os.path.join(BASE_DIR, "aviationstack-mcp")
+AVIATION_SRC = os.path.join(AVIATION_DIR, "src")
+AVIATION_PYTHONPATH = f"{AVIATION_DIR}{os.pathsep}{AVIATION_SRC}"
+
 # MCP Clients 
 client = MultiServerMCPClient(
     {
@@ -33,6 +38,8 @@ client = MultiServerMCPClient(
             ],
             "env": {
                 "AVIATION_STACK_API_KEY": AVIATION_STACK_API_KEY
+                # Tells Python where to locate aviationstack_mcp module
+                "PYTHONPATH": AVIATION_PYTHONPATH
             }
             
             
