@@ -37,7 +37,7 @@ client = MultiServerMCPClient(
                 "run"
             ],
             "env": {
-                "AVIATION_STACK_API_KEY": AVIATION_STACK_API_KEY
+                "AVIATION_STACK_API_KEY": AVIATION_STACK_API_KEY,
                 # Tells Python where to locate aviationstack_mcp module
                 "PYTHONPATH": AVIATION_PYTHONPATH
             }
