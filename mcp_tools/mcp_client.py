@@ -11,6 +11,7 @@ OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
 
 # This gets the absolute path to your project folder
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+WEATHER_SERVER_PATH = os.path.join(BASE_DIR, "weather_mcp_server.py")
 
 # MCP Clients 
 client = MultiServerMCPClient(
@@ -25,8 +26,10 @@ client = MultiServerMCPClient(
             "transport": "stdio",
             "command": "python",
             "args": [
-                # Dynamically point to the weather server file
-                os.path.join(BASE_DIR, "mcp", "weather_mcp_server.py")
+                "-m",
+                "aviationstack_mcp",
+                "mcp",
+                "run"
             ],
             "env": {
                 "AVIATION_STACK_API_KEY": AVIATION_STACK_API_KEY
@@ -39,7 +42,7 @@ client = MultiServerMCPClient(
             "transport": "stdio",
             "command": "python",
             "args": [
-                r"C:\Users\LENOVO\Desktop\Travel_project\mcp\wheather_mcp_server.py"
+                WEATHER_SERVER_PATH
             ],
             "env": {
                 "OPENWEATHER_API_KEY": OPENWEATHER_API_KEY
