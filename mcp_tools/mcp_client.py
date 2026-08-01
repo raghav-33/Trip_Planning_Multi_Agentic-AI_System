@@ -14,12 +14,8 @@ OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 WEATHER_SERVER_PATH = os.path.join(BASE_DIR, "weather_mcp_server.py")
 
-# Direct path to the aviationstack_mcp package directory
-AVIATION_SRC_DIR = os.path.join(BASE_DIR, "aviationstack-mcp", "src")
-
-# Add the src directory directly to Python's path so it can find the module
-if AVIATION_SRC_DIR not in sys.path:
-    sys.path.append(AVIATION_SRC_DIR)
+# Point directly to our new runner script
+AVIATION_RUNNER_PATH = os.path.join(BASE_DIR, "aviation_runner.py")
 
 # MCP Clients 
 client = MultiServerMCPClient(
@@ -34,15 +30,12 @@ client = MultiServerMCPClient(
             "transport": "stdio",
             "command": "python",
             "args": [
-                "-m",
-                "aviationstack_mcp",
-                "mcp",
+                AVIATION_RUNNER_PATH,  # Use the runner file
+                "mcp",                 # Pass the arguments it expects
                 "run"
             ],
             "env": {
-                "AVIATION_STACK_API_KEY": AVIATION_STACK_API_KEY,
-                # Explicitly pass the updated PYTHONPATH to the subprocess
-                "PYTHONPATH": AVIATION_SRC_DIR
+                "AVIATION_STACK_API_KEY": AVIATION_STACK_API_KEY
             }
             
             
