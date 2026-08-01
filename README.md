@@ -185,6 +185,12 @@ This project is configured for cloud deployment on Render.
 - **Build Command**: `pip install -r requirements.txt`
 - **Start Command**: `streamlit run frontend.py --server.port $PORT --server.address 0.0.0.0`
 
+## Live | Deployed Project Link
+```bash
+https://trip-planning-multi-agentic-ai-system.onrender.com
+```
+
+
 ## Future Improvements
 
 - Replace local stdio MCP execution with external REST or SSE-based MCP servers to fully decouple the AI backend from environment-specific pathing issues.
